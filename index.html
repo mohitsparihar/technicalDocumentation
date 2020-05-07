@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Techinical Documentation</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <header>My Array Functions</header>
+        <ul>
+            <li><a class="nav-link" href="#Function_Syntax">Function Syntax</a></li>
+			<li><a class="nav-link" href="#Prototype">Prototype</a></li>
+			<li><a class="nav-link" href="#My_forEach">My forEach</a></li>
+			<li><a class="nav-link" href="#My_Map">My Map</a></li>
+			<li><a class="nav-link" href="#My_Some">My Some</a></li>
+			<li><a class="nav-link" href="#My_Includes">My Includes</a></li>
+			<li><a class="nav-link" href="#My_Filter">My Filter</a></li>
+			<li><a class="nav-link" href="#My_Reducer_Function">My Reducer Function</a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="Function_Syntax">
+            <header>Function Syntax</header>
+            <div class="content">
+            <p>A function in JavaScript comprises of three statements.
+                <ul>
+                    <li>The name of the function.</li>
+                    <li>A list of arguments to the function enclosed in parentheses and separated by commas.</li>
+                    <li>The JavaScript statements that define the function, enclosed</li>
+                </ul>
+                Function in Javascript is defined in a number of ways. the common function definition is
+                <code>
+					<pre>
+					function function_name(arg1,arg2,...) {
+						//operation to be carried out by the function
+					}
+					</pre>
+				</code>
+				The above notation is the most common form of function declaration.</p>
+            </div>
+		</section>
+		<section class="main-section" id="Prototype">
+			<header>Prototype</header>
+			<p>Prototypes are the mechanism by which JavaScript objects inherit features from one another.</p>
+			<p>JavaScript is often described as a prototype-based language — to provide inheritance, objects can have a prototype object, which acts as a template object that it inherits methods and properties from.</p>
+			<p>In JavaScript, a link is made between the object instance and its prototype, and the properties and methods are found by walking up the chain of prototypes.</p>
+		</section>
+		<section class="main-section" id="My_forEach">
+			<header>My forEach</header>
+			<p>The myForEach( ) method calls a provided callback function once for each element in an array in ascending order.</p>
+			<p>
+				<ul>
+					<li>callback - Function to execute on each element. It accepts between one and three arguments:</li>
+					<ul>
+						<li>currentValue - The current element being processed in the array.</li>
+						<li>index Optional - The index currentValue in the array.</li>
+						<li>array Optional - The array forEach() was called upon.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+					Array.prototype.myForEach = function(f) {
+						for (let i = 0; i < this.length; i++) {
+							f(this[i], i ,this);
+					    }
+					}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+					myArray = [1, 2, 3, 4];
+					myArray.myForEach((item,index,arr) => {
+					console.log(item, index, arr);
+					})
+					</pre>
+				</code>
+				This results in -
+				<code>
+					<pre>
+					1 0 (4) [1, 2, 3, 4]
+					2 1 (4) [1, 2, 3, 4]
+ 					3 2 (4) [1, 2, 3, 4]
+ 					4 3 (4) [1, 2, 3, 4]
+					</pre>
+				</code>
+			</p>
+		</section>
+		<section class="main-section" id="My_Map">
+			<header>My Map</header>
+			<p>The myMap( ) method creates a new array populated with the results of calling a provided function on every element in the calling array.</p>
+			<p>
+				<ul>
+					<li>callback - Function to execute on each element. It accepts between one and three arguments:</li>
+					<ul>
+						<li>currentValue - The current element being processed in the array.</li>
+						<li>index Optional - The index currentValue in the array.</li>
+						<li>array Optional - The array forEach() was called upon.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+						Array.prototype.myMap = function(f) {
+							let result = [];
+							for (let i = 0; i < this.length; i++) {
+								result.push(f(this[i], i, this));
+							}
+							return result;
+						}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+					let arr = [1, 2, 3, 4, 7, 14, 21]
+					console.log(arr.myMap(item => item % 7 === 0));
+
+					//expected output: [false, false, false, false, true, true, true,]
+					</pre>
+				</code>
+				This reults in -
+				<code>
+					<pre>
+					[false, false, false, false, true, true, true,]
+					</pre>
+				</code>
+			</p>
+		</section>
+		<section class="main-section" id="My_Some">
+			<header>My Some</header>
+			<p>The mySome( ) method tests whether at least one element in the array passes the test implemented by the provided function. It returns a Boolean value. </p>
+			<p>
+				<ul>
+					<li>callback - Function to execute on each element. It accepts between one and three arguments:</li>
+					<ul>
+						<li>currentValue - The current element being processed in the array.</li>
+						<li>index Optional - The index currentValue in the array.</li>
+						<li>array Optional - The array forEach() was called upon.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+						Array.prototype.mySome = function(f) {
+							let result = false;
+						  for (let i = 0; i < this.length; i++) {
+							if(f(this[i], i, this)) {
+							result = true;
+							}
+						  }
+						  return result;
+						}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+						let arr = [1, 2, 3, 4, 7]
+						arr.mySome(item => item % 7 === 0);
+
+						//expected output: true
+					</pre>
+				</code>
+				This results in -
+				<code>
+					<pre>
+						true
+					</pre>
+				</code>
+			</p>
+		</section>
+		<section class="main-section" id="My_Includes">
+			<header>My Includes</header>
+			<p>The myIncludes( ) method determines whether an array includes a certain value among its entries, returning true or false as appropriate.</p>
+			<p>
+				<ul>
+						<li>valueToFind - The value to be looked for.</li>
+						<li>fromIndex - The index currentValue in the array.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+					Array.prototype.myIncludes = function(valueToFind, fromIndex = 0) {
+						let result = false;
+						for (let i = fromIndex; i < this.length; i++) {
+							if(this[i] === valueToFind) {
+				  			result = true;
+							}
+						}
+						return result;
+					}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+					console.log([1, 2, 3, 4].myIncludes(1));
+					//true
+					</pre>
+				</code>
+				OR
+				<code>
+					<pre>
+					console.log([1,2,3,4].myIncludes(4,3));
+					//true
+					</pre>
+				</code>
+			</p>
+		</section>
+		<section class="main-section" id="My_Filter">
+			<header>My Filter</header>
+			<p>The myFilter( ) method creates a new array with all elements that pass the test implemented by the provided function.</p>
+			<p>
+				<ul>
+					<li>callback - Function to execute on each element. It accepts between one and three arguments:</li>
+					<ul>
+						<li>currentValue - The current element being processed in the array.</li>
+						<li>index Optional - The index currentValue in the array.</li>
+						<li>array Optional - The array forEach() was called upon.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+						Array.prototype.myFilter = function(f) {
+							let result = [];
+						  	for (let i = 0; i < this.length; i++) {
+								if(f(this[i], i, this)) {
+								result.push(this[i]);
+							}
+						  }
+						  return result;
+						}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+						const cars = ['BMW', 'Suzuki', 'Mercedes', 'Honda', 'Mahindra', 'Tata'];
+						
+						const result = cars.myFilter(item => item.length>5);
+					</pre>
+				</code>
+				This results in-
+				<code>
+					<pre>
+						['Suzuki', 'Mercedes', 'Mahindra']
+					</pre>
+				</code>
+			</p>
+		</section>
+		<section class="main-section" id="My_Reducer_Function">
+			<header>My Reducer Function</header>
+			<p>The myReduce( ) method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.</p>
+			<p>
+				<ul>
+					<li>callback - Function to execute on each element. It accepts two arguments</li>
+					<li>initialValue - To be passed in to the callback function</li>
+					<ul>
+						<li>initialValue - The value to start from in the callback function.</li>
+						<li>currentValue - The value that is present in the loop.</li>
+					</ul>
+				</ul>
+			</p>
+			<p>
+				<code>
+					<pre>
+					Array.prototype.myReduce = function(f, initialValue) {
+					let result = initialValue;
+					for (let i = 0; i < this.length; i++) {
+					result = f(result, this[i]);
+					}
+					return result;
+					}
+					</pre>
+				</code>
+			</p>
+			<p>
+				Example :-
+				<code>
+					<pre>
+					let arr = [1, 2, 3, 4];
+					console.log(arr.myReduce((a,c) => a + c, 5));
+					</pre>
+				</code>
+				This resullts in -
+				<code>
+					<pre>
+					15
+					/* initialValue = 5
+					function performs the fucntion of adding all the array elements
+					result = 5 + 1 + 2 + 3 + 4 = 15 */
+					</pre>
+				</code>
+			</p>
+		</section>
+    </main>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+
+</html>
